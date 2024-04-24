@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Laundry Tracker{% endblock title %}
+
+{% block head %}
+<script src="javascripts/index.js"></script>
+{% endblock head %}
+
+{% block content %}
+	<h1 class="text-5xl mb-4">Laundry Tracker</h1>
+	<p class="text-xl">For you laundry tracking needs.</p>
+	<h2 class="text-3xl mt-7 mb-4">History</h2>
+	<div hx-get="/history" hx-swap="outerHTML" hx-trigger="load"></div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %} {% endblock title %}</title>
+		<link href="stylesheets/tailwind.css" rel="stylesheet" type="text/css">
+		<link href="stylesheets/base.css" rel="stylesheet" type="text/css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<script src="javascripts/htmx.min.js"></script>
+		<script src="javascripts/response-targets.js"></script>
+		{% block head %} {% endblock head %}
+	</head>
+	<body class="bg-gray-900" hx-ext="response-targets">
+		<ul class="pl-2 nav bg-gray-700 text-indigo-200 inter-bold text-lg">
+			<li><a href="/">Home</a></li>
+			<li><a href="/new">Submit</a></li>
+			<li><a href="/collect">Collect</a></li>
+		</ul>
+		<div class="m-5 text-indigo-200">
+			{% block content %} {% endblock content %}
+		</div>
+	</body>
+</html>

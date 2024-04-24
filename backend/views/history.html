@@ -1,0 +1,7 @@
+<div>
+	{% for item in history %}
+	<p class="text-xl mb-3"><a class="hover:underline hover:cursor-pointer" onclick="copyToClipboard('{{item.date.getTime()}}')">{{item.total}} clothes on {{item.date.toLocaleDateString()}}</a></p>
+	{% else %}
+	<p>No prior history of laundry</p>
+	{% endfor %}
+</div>

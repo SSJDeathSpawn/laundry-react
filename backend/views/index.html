@@ -1,14 +1,40 @@
-{% extends "base.html" %}
-
-{% block title %}Laundry Tracker{% endblock title %}
-
-{% block head %}
-<script src="javascripts/index.js"></script>
-{% endblock head %}
-
-{% block content %}
-	<h1 class="text-5xl mb-4">Laundry Tracker</h1>
-	<p class="text-xl">For you laundry tracking needs.</p>
-	<h2 class="text-3xl mt-7 mb-4">History</h2>
-	<div hx-get="/history" hx-swap="outerHTML" hx-trigger="load"></div>
-{% endblock content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %} {% endblock title %}</title>
+    <link href="stylesheets/tailwind.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/base.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="javascripts/htmx.min.js"></script>
+    <!-- <script src="javascripts/response-targets.js"></script> -->
+    <title>Laundry Tracker | Admin Panel</title>
+  </head>
+  <body>
+    <div class="topbar">Laundry Tracker</div>
+    <div id="mySidenav" class="sidebar">
+      <a class="cursor-pointer" hx-get="/stats" hx-target="#content" hx-swap="innerHTMl">Stats</a>
+      <div>Tables</div>
+      <a class="cursor-pointer" hx-get="/tables/history" hx-target="#content" hx-swap="innerHTMl"
+        >History</a
+      >
+      <a class="cursor-pointer" hx-get="/tables/collect" hx-target="#content" hx-swap="innerHTMl"
+        >CollectItems</a
+      >
+      <a class="cursor-pointer" hx-get="/tables/submit" hx-target="#content" hx-swap="innerHTMl"
+        >SubmitItems</a
+      >
+    </div>
+    <div class="container">
+      <h1 class="text-5xl mb-4">Admin Panel</h1>
+      <h2 class="text-3xl mb-4">Laundry Tracker</h2>
+      <div id="content" hx-get="/stats" hx-swap="innerHTML" hx-trigger="load"></div>
+    </div>
+  </body>
+</html>

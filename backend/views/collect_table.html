@@ -1,0 +1,6 @@
+<h1 class="text-2xl">CollectItems</h1>
+{% for item in items %}
+<div class="my-4 border-2 border-opacity-15 border-slate-700 p-2 rounded-xl">
+  <p>{{ item.name }} - {{ item.count }} / {{item.total_amt}}</p>
+</div>
+{% endfor %}

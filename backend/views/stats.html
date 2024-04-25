@@ -1,0 +1,6 @@
+<div class="border-2 border-opacity-25 rounded-xl border-gray-400 p-2">
+	<p class="text-lg">Previous Clothes: {{ history.length }}</p>
+	<p class="text-lg">Current clothes in collect: {{ submitItems.length }}</p>
+	<p class="text-lg">Current clothes to be counted: {{ collectItems.length }}</p>
+	<p class="text-lg">Submitted Items: {% if collectItems.length > 0 %} True {% else %} False {% endif %}</p>
+</div>

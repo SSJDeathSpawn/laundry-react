@@ -1,26 +1,80 @@
-ul.nav {
-  list-style-type: none;
+.sidebar {
   margin: 0;
-  overflow: hidden;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
-ul.nav li {
-  float: left;
-}
-
-ul.nav li a {
+.sidebar div {
   display: block;
-  text-align: center;
-  padding: 14px 16px;
+  color: #555;
+  padding: 10px;
+  font-size: 1em;
   text-decoration: none;
 }
 
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+.topbar {
+  display: block;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  font-size: 1.25em;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+div.container {
+  margin-left: 200px;
+  padding: 20px 16px;
+  width: 1336px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
 
 .inter-bold {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 650;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
+  font-variation-settings: "slnt" 0;
 }

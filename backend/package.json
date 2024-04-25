@@ -3,23 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "postcss public/stylesheets/tailwind.raw.css -o public/stylesheets/tailwind.css; node ./bin/www",
     "watch": "nodemon -e js,html,css"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.19",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "mongoose": "^8.2.0",
+    "mongoose": "^8.3.2",
     "morgan": "~1.9.1",
-    "nunjucks": "^3.2.4"
-  },
-  "devDependencies": {
-    "connect-livereload": "^0.6.1",
-    "livereload": "^0.9.3",
     "nodemon": "^3.1.0",
-    "tailwind": "^4.0.0"
+    "nunjucks": "^3.2.4",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.3"
   }
 }

@@ -52,76 +52,71 @@ router.get("/items/submit", (req, res, next) => {
 	});
 });
 
-router.post("/new", function(req, res, next) {
+router.post("/new", async function(req, res, next) {
 	console.log(req.query);
 	console.log(req.body);
 	switch (req.query.op) {
 		case "new":
-			models.SubmitItem.exists({ name: "cloth" })
-				.then((result) => {
-					if (result == null) {
-						let item = models.SubmitItem();
-						item.amt = 1;
-						item.name = "cloth";
-						item.save().then((_) => {
-							models.SubmitItem.find({}).then((items) => {
-								console.log(items);
-								res.status(200).send(items);
-							});
-						});
-					} else {
-						res
-							.status(409)
-							.send("Rename existing before trying to add new clothes");
-						return;
-					}
-				})
-				.catch((err) => res.status(404).send(err));
+			try {
+				const result = await models.SubmitItem.exists({ name: "cloth" });
+				if (result == null) {
+					let item = models.SubmitItem();
+					item.amt = 1;
+					item.name = "cloth";
+					item.save().then(async (_) => {
+						const items = await models.SubmitItem.find({});
+						res.status(200).send(items);
+					});
+				} else {
+					res
+						.status(409)
+						.send("Rename existing before trying to add new clothes");
+					return;
+				}
+			} catch (err) {
+				res.status(404).send(err);
+			}
 			break;
 		case "increment":
 			console.log(req.body);
-			models.SubmitItem.findOne({ name: req.body.name })
-				.then((item) => {
-					console.log(item);
-					item.amt += 1;
-					item.save().then((_) => {
-						models.SubmitItem.find({}).then((items) => {
+			try {
+				const item = await models.SubmitItem.findOne({ name: req.body.name });
+				item.amt += 1;
+				item.save().then(async (_) => {
+					const items = await models.SubmitItem.find({});
+					console.log(items);
+					res.status(200).send(items);
+				});
+			} catch (err) {
+				res.status(404).send(err);
+			}
+			break;
+		case "decrement":
+			try {
+				const item = await models.SubmitItem.findOne({ name: req.body.name });
+				if (item.amt == 1) {
+					models.SubmitItem.findOneAndDelete({
+						name: item.name,
+						amt: item.amt,
+					})
+						.exec()
+						.then(async (_) => {
+							const items = await models.SubmitItem.find({});
 							console.log(items);
 							res.status(200).send(items);
 						});
+				} else {
+					item.amt -= 1;
+					item.save().then(async (_) => {
+						const items = await models.SubmitItem.find({});
+						console.log(items);
+						res.status(200).send(items);
 					});
-				})
-				.catch((err) => res.status(404).send(err));
-			break;
-		case "decrement":
-			models.SubmitItem.findOne({ name: req.body.name })
-				.then((item) => {
-					if (item.amt == 1) {
-						models.SubmitItem.findOneAndDelete({
-							name: item.name,
-							amt: item.amt,
-						})
-							.exec()
-							.then((_) => {
-								models.SubmitItem.find({}).then((items) => {
-									console.log(items);
-									res.status(200).send(items);
-								});
-							});
-					} else {
-						item.amt -= 1;
-						item.save().then((_) => {
-							models.SubmitItem.find({}).then((items) => {
-								console.log(items);
-								res.status(200).send(items);
-							});
-						});
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-					res.status(404).send(err);
-				});
+				}
+			} catch (err) {
+				console.log(err);
+				res.status(404).send(err);
+			}
 			break;
 		case "change":
 			if (Object.values(req.body)[0] === "") {
@@ -131,25 +126,26 @@ router.post("/new", function(req, res, next) {
 				});
 				return;
 			}
-			models.SubmitItem.findOne({ name: Object.values(req.body)[0] }).then(
-				(result) => {
-					if (result != null) {
-						res.status(409).send("Cloth type already exists");
-						return;
-					}
-					models.SubmitItem.findOne({ name: Object.keys(req.body)[0] })
-						.then((item) => {
-							item.name = Object.values(req.body)[0];
-							item.save().then((_) => {
-								models.SubmitItem.find({}).then((items) => {
-									console.log(items);
-									res.status(200).send(items);
-								});
-							});
-						})
-						.catch((err) => res.status(404).send(err));
-				},
-			);
+			const result = await models.SubmitItem.findOne({
+				name: Object.values(req.body)[0],
+			});
+			if (result != null) {
+				res.status(409).send("Cloth type already exists");
+				return;
+			}
+			try {
+				const item = await models.SubmitItem.findOne({
+					name: Object.keys(req.body)[0],
+				});
+				item.name = Object.values(req.body)[0];
+				item.save().then(async (_) => {
+					const items = await models.SubmitItem.find({});
+					console.log(items);
+					res.status(200).send(items);
+				});
+			} catch (err) {
+				res.status(404).send(err);
+			}
 			break;
 		default:
 			res.sendStatus(403);

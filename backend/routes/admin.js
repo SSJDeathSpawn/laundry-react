@@ -9,7 +9,7 @@ router.get("/", function(req, res, next) {
 router.get("/stats", async function(req, res, next) {
 	const history = await models.History.find({});
 	const collectItems = await models.CollectItem.find({});
-	const submitItems = await models.CollectItem.find({});
+	const submitItems = await models.SubmitItem.find({});
 	res.render("stats", {
 		history: history,
 		collectItems: collectItems,

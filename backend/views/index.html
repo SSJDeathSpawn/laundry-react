@@ -19,22 +19,45 @@
   <body>
     <div class="topbar">Laundry Tracker</div>
     <div id="mySidenav" class="sidebar">
-      <a class="cursor-pointer" hx-get="/stats" hx-target="#content" hx-swap="innerHTMl">Stats</a>
+      <a
+        class="cursor-pointer"
+        hx-get="/stats"
+        hx-target="#content"
+        hx-swap="innerHTMl"
+        >Stats</a
+      >
       <div>Tables</div>
-      <a class="cursor-pointer" hx-get="/tables/history" hx-target="#content" hx-swap="innerHTMl"
+      <a
+        class="cursor-pointer"
+        hx-get="/tables/history"
+        hx-target="#content"
+        hx-swap="innerHTMl"
         >History</a
       >
-      <a class="cursor-pointer" hx-get="/tables/collect" hx-target="#content" hx-swap="innerHTMl"
+      <a
+        class="cursor-pointer"
+        hx-get="/tables/collect"
+        hx-target="#content"
+        hx-swap="innerHTMl"
         >CollectItems</a
       >
-      <a class="cursor-pointer" hx-get="/tables/submit" hx-target="#content" hx-swap="innerHTMl"
+      <a
+        class="cursor-pointer"
+        hx-get="/tables/submit"
+        hx-target="#content"
+        hx-swap="innerHTMl"
         >SubmitItems</a
       >
     </div>
     <div class="container">
       <h1 class="text-5xl mb-4">Admin Panel</h1>
       <h2 class="text-3xl mb-4">Laundry Tracker</h2>
-      <div id="content" hx-get="/stats" hx-swap="innerHTML" hx-trigger="load"></div>
+      <div
+        id="content"
+        hx-get="/stats"
+        hx-swap="innerHTML"
+        hx-trigger="load"
+      ></div>
     </div>
   </body>
 </html>
